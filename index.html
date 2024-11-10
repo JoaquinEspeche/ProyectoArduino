@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Monitor de Temperatura y Humedad</title>
+</head>
+<body>
+  <h1>Temperatura y Humedad en Tiempo Real</h1>
+  <div id="data">Esperando datos...</div>
+
+  <script>
+    const ws = new WebSocket('ws://localhost:3000');
+    ws.onmessage = (event) => {
+      const sensorData = JSON.parse(event.data);
+      document.getElementById('data').innerText = `Temperatura: ${sensorData.temperature}°C, Humedad: ${sensorData.humidity}%`;
+    };
+  </script>
+</body>
+</html>
